@@ -33,7 +33,7 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-[#0D0F12] h-screen flex flex-col items-center justify-center gap-20">
+    <main className="bg-[#0D0F12] h-screen flex flex-col items-center justify-center gap-20 relative">
       <h1 className="text-7xl font-extrabold text-[#E3E6E8]">Tic Tac Toe</h1>
       <section className="grid grid-cols-3">
         {board.map((square, index) => {
@@ -57,6 +57,12 @@ export default function Home() {
       >
         Resetear
       </button>
+      <section className="absolute bottom-10 right-10 flex flex-col items-center justify-center gap-2">
+        <span className="text-[#999] font-semibold text-lg">Current turn</span>
+        <div className="grid place-items-center">
+          {turn === TURNS.X ? TURNS.X : TURNS.O}
+        </div>
+      </section>
     </main>
   );
 }
