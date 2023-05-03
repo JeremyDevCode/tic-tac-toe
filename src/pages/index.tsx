@@ -2,6 +2,8 @@ import { useState } from "react";
 import { checkWinnerFrom, checkEndGame } from "../modules/board";
 import { TURNS } from "../constants.js";
 import { Square } from "../components/Square";
+import { WinnerModal } from "../components/WinnerModal";
+import { Button } from "../components/Button";
 
 export default function Home() {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -44,19 +46,9 @@ export default function Home() {
           );
         })}
       </section>
-      <button
-        className={`text-[#0D0F12] py-2 px-5 rounded-lg font-semibold ${
-          board.every((square) => square !== null) ? "hover:bg-[#D3D6D8]" : ""
-        } ${
-          board.every((square) => square === null)
-            ? "bg-[#999]"
-            : "bg-[#E3E6E8]"
-        }`}
-        disabled={board.every((square) => (square === null ? true : false))}
-        onClick={resetGame}
-      >
-        Resetear
-      </button>
+      <Button board={board} resetGame={resetGame}>
+        Reset
+      </Button>
       {winner === null && (
         <section className="absolute bottom-10 right-10 flex flex-col items-center justify-center gap-2">
           <span className="text-[#999] font-semibold text-lg">
@@ -67,6 +59,8 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      <WinnerModal resetGame={resetGame} winner={winner} board={board} />
     </main>
   );
 }
