@@ -57,12 +57,16 @@ export default function Home() {
       >
         Resetear
       </button>
-      <section className="absolute bottom-10 right-10 flex flex-col items-center justify-center gap-2">
-        <span className="text-[#999] font-semibold text-lg">Current turn</span>
-        <div className="grid place-items-center">
-          {turn === TURNS.X ? TURNS.X : TURNS.O}
-        </div>
-      </section>
+      {winner === null && (
+        <section className="absolute bottom-10 right-10 flex flex-col items-center justify-center gap-2">
+          <span className="text-[#999] font-semibold text-lg">
+            Current turn
+          </span>
+          <div className="grid place-items-center">
+            {turn === TURNS.X ? TURNS.X : TURNS.O}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
