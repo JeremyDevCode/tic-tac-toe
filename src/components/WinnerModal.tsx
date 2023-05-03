@@ -1,7 +1,12 @@
 import { Button } from "./Button";
-import { Square } from "./Square";
 
-export function WinnerModal({ winner, resetGame, board }) {
+interface ModalProps {
+  winner: boolean | null;
+  resetGame: () => void;
+  board: string[];
+}
+
+export function WinnerModal({ winner, resetGame, board }: ModalProps) {
   if (winner === null) return null;
 
   const winnerText = winner === false ? "Empate" : "And the winner is";

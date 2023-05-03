@@ -1,7 +1,7 @@
 import React from "react";
 
 interface ButtonProps {
-  board: [];
+  board: string[];
   resetGame: () => void;
   children: React.ReactNode;
 }
