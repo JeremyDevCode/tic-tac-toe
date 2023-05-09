@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { useState } from "react";
 import { checkWinnerFrom, checkEndGame } from "../modules/board";
 import { TURNS } from "../constants.js";
 import { Square } from "../components/Square";
@@ -9,57 +8,38 @@ import { Button } from "../components/Button";
 export default function Home() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [winner, setWinner] = useState<boolean | null>(null);
-  const [canPlay, setCanPlay] = useState<boolean>(true);
   const [turn, setTurn] = useState(TURNS.X);
-  const socket = io("http://localhost:8000");
+  const [canPlay, setCanPlay] = useState<boolean>(true);
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
     setWinner(null);
+    setCanPlay(true);
   };
 
   const closeModal = () => {
+    setCanPlay(false);
     setWinner(null);
-  }
+  };
 
-  const updateBoard = useCallback(
-    (index: number, updatedFromOther: boolean) => {
-      if (board[index] || winner) return;
+  const updateBoard = (index: number) => {
+    if (board[index] || winner || !canPlay) return;
 
-      const newBoard = [...board];
-      newBoard[index] = turn;
-      setBoard(newBoard);
+    const newBoard = [...board];
+    newBoard[index] = turn;
+    setBoard(newBoard);
 
-      const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
-      setTurn(newTurn);
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
+    setTurn(newTurn);
 
-      if (!updatedFromOther) {
-        socket.emit("play", index);
-      }
-
-      const newWinner = checkWinnerFrom(newBoard);
-      if (newWinner) {
-        setWinner(newWinner);
-      } else if (checkEndGame(newBoard)) {
-        setWinner(false);
-      }
-    },
-    [board, setBoard, setTurn, socket, turn, winner]
-  );
-
-  useEffect(() => {
-    const onPlay = (index: number) => {
-      console.log("Índice actual", index);
-      updateBoard(index, true);
-    };
-
-    socket.on("play", onPlay);
-
-    return () => {
-      socket.off("play", onPlay);
-    };
-  }, [socket, updateBoard]);
+    const newWinner = checkWinnerFrom(newBoard);
+    if (newWinner) {
+      setWinner(newWinner);
+    } else if (checkEndGame(newBoard)) {
+      setWinner(false);
+    }
+  };
 
   return (
     <main className="bg-[#0D0F12] h-screen flex flex-col items-center justify-center gap-20 relative">
@@ -81,13 +61,18 @@ export default function Home() {
           <span className="text-[#999] font-semibold text-lg">
             Current turn
           </span>
-          <div className="grid place-items-center w-[100px] h-[100px]">
+          <div className="grid place-items-center">
             {turn === TURNS.X ? TURNS.X : TURNS.O}
           </div>
         </section>
       )}
 
-      <WinnerModal resetGame={resetGame} closeModal={closeModal} winner={winner} board={board} />
+      <WinnerModal
+        resetGame={resetGame}
+        winner={winner}
+        board={board}
+        closeModal={closeModal}
+      />
     </main>
   );
 }

@@ -3,12 +3,12 @@ import React from "react";
 interface SquareProps {
   children: React.ReactNode;
   index: number;
-  updateBoard: (index: number) => void;
+  updateBoard: (index: number, updatedFromOther: boolean) => void;
 }
 
 function Square({ children, index, updateBoard }: SquareProps) {
   const handleClick = () => {
-    updateBoard(index);
+    updateBoard(index, false);
   };
 
   return (

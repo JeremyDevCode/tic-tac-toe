@@ -5,8 +5,8 @@ export const TURNS = {
     <Image
       className="w-3/5"
       src="/cross.png"
-      width={60}
-      height={60}
+      width={100}
+      height={100}
       alt="cross"
     />
   ),
@@ -14,8 +14,8 @@ export const TURNS = {
     <Image
       className="w-3/5 invert"
       src="/circle.png"
-      width={60}
-      height={60}
+      width={100}
+      height={100}
       alt="circle"
     />
   ),
