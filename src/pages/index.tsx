@@ -11,7 +11,9 @@ export default function Home() {
   const [winner, setWinner] = useState<boolean | null>(null);
   const [canPlay, setCanPlay] = useState<boolean>(true);
   const [turn, setTurn] = useState(TURNS.X);
-  const socket = io("http://localhost:8000");
+  const socket = io(
+    "https://railway.app/project/3d5e692b-749f-44fa-9fed-232262ebb7cf/service/8bc4766c-2afc-45a7-b87e-19d1227c91d8?id=a1977a10-79d0-4a0e-baae-d120524277e0"
+  );
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
@@ -21,7 +23,7 @@ export default function Home() {
 
   const closeModal = () => {
     setWinner(null);
-  }
+  };
 
   const updateBoard = useCallback(
     (index: number, updatedFromOther: boolean) => {
@@ -87,7 +89,12 @@ export default function Home() {
         </section>
       )}
 
-      <WinnerModal resetGame={resetGame} closeModal={closeModal} winner={winner} board={board} />
+      <WinnerModal
+        resetGame={resetGame}
+        closeModal={closeModal}
+        winner={winner}
+        board={board}
+      />
     </main>
   );
 }

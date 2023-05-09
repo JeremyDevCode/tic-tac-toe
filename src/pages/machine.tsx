@@ -42,13 +42,13 @@ export default function Home() {
     editedBoard[index] = TURNS.X;
 
     setBoard(editedBoard);
-
-    let randomNumber = getBestMove(editedBoard, 0, false);
-    if (editedBoard[randomNumber] === "") {
-      editedBoard[randomNumber] = TURNS.O;
-    }
-
-    setBoard(editedBoard);
+    setTimeout(() => {
+      let randomNumber = getBestMove(editedBoard, 0, false);
+      if (editedBoard[randomNumber] === "") {
+        editedBoard[randomNumber] = TURNS.O;
+      }
+      setBoard(editedBoard);
+    }, 10000);
 
     if (isTerminal(editedBoard).winner) {
       const newWinner = checkWinnerFrom(editedBoard);
