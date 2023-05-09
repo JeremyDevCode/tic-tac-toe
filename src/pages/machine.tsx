@@ -48,7 +48,7 @@ export default function Home() {
         editedBoard[randomNumber] = TURNS.O;
       }
       setBoard(editedBoard);
-    }, 10000);
+    }, 500);
 
     if (isTerminal(editedBoard).winner) {
       const newWinner = checkWinnerFrom(editedBoard);
