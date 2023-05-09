@@ -42,12 +42,14 @@ export default function Home() {
     editedBoard[index] = TURNS.X;
 
     setBoard(editedBoard);
+    setCanPlay(false);
     setTimeout(() => {
       let randomNumber = getBestMove(editedBoard, 0, false);
       if (editedBoard[randomNumber] === "") {
         editedBoard[randomNumber] = TURNS.O;
       }
       setBoard(editedBoard);
+      setCanPlay(true);
     }, 500);
 
     if (isTerminal(editedBoard).winner) {
