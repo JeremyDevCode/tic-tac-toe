@@ -5,6 +5,8 @@ import { TURNS } from "../../constants.js";
 import { Square } from "../../components/Square";
 import { WinnerModal } from "../../components/WinnerModal";
 import { Button } from "../../components/Button";
+import Link from "next/link";
+import { ArrowIcon } from "@/components/assets/icons/ArrowIcon";
 
 export default function Multiplayer() {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -63,6 +65,12 @@ export default function Multiplayer() {
 
   return (
     <main className="bg-[#0D0F12] h-screen flex flex-col items-center justify-center gap-20 relative">
+      <Link
+        href="/"
+        className="absolute flex items-center justify-center top-10 left-10 hover:bg-[#E3E6E811] py-2 px-2 rounded-full text-[#AAA] hover:text-[#E3E6E8] transition-colors"
+      >
+        <ArrowIcon />
+      </Link>
       <h1 className="text-7xl font-extrabold text-[#E3E6E8]">
         Tic Tac Toe <span className="text-xl text-[#999]">{"[BETA]"}</span>
       </h1>
