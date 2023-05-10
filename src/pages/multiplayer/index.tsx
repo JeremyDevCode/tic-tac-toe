@@ -6,7 +6,7 @@ import { Square } from "../../components/Square";
 import { WinnerModal } from "../../components/WinnerModal";
 import { Button } from "../../components/Button";
 
-function Multiplayer() {
+export default function Multiplayer() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [winner, setWinner] = useState<boolean | null>(null);
   const [canPlay, setCanPlay] = useState<boolean>(true);
@@ -96,5 +96,3 @@ function Multiplayer() {
     </main>
   );
 }
-
-export { Multiplayer };
