@@ -43,23 +43,23 @@ export default function Home() {
 
     setBoard(editedBoard);
     setCanPlay(false);
+    let randomNumber = getBestMove(editedBoard, 0, false);
+
     setTimeout(() => {
-      let randomNumber = getBestMove(editedBoard, 0, false);
       if (editedBoard[randomNumber] === "") {
         editedBoard[randomNumber] = TURNS.O;
       }
       setBoard(editedBoard);
       setCanPlay(true);
-    }, 500);
-
-    if (isTerminal(editedBoard).winner) {
-      const newWinner = checkWinnerFrom(editedBoard);
-      if (newWinner) {
-        setWinner(newWinner);
-      } else if (checkEndGame(editedBoard)) {
-        setWinner(false);
+      if (isTerminal(editedBoard).winner) {
+        const newWinner = checkWinnerFrom(editedBoard);
+        if (newWinner) {
+          setWinner(newWinner);
+        } else if (checkEndGame(editedBoard)) {
+          setWinner(false);
+        }
       }
-    }
+    }, 500);
   };
 
   const isEmpty = (board: ReactNode[]) => {

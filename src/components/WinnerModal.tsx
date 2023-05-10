@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { AgainIcon } from "../assets/icons/AgainIcon";
-import { ShareIcon } from "../assets/icons/ShareIcon";
 import { ReactNode } from "react";
+import { HomeIcon } from "../assets/icons/HomeIcon";
+import Link from "next/link";
 
 interface ModalProps {
   winner: boolean | null;
@@ -47,13 +48,13 @@ export function WinnerModal({
             <AgainIcon />
             Play again
           </button>
-          <button
-            onClick={resetGame}
+          <Link
+            href="/"
             className="flex bg-[#11131B] text-[#CECED0] items-center justify-center gap-3 py-5 px-5 w-[154px]"
           >
-            <ShareIcon />
-            Share
-          </button>
+            <HomeIcon />
+            Menu
+          </Link>
         </footer>
       </div>
     </section>
