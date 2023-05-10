@@ -11,7 +11,7 @@ export default function Multiplayer() {
   const [winner, setWinner] = useState<boolean | null>(null);
   const [canPlay, setCanPlay] = useState<boolean>(true);
   const [turn, setTurn] = useState(TURNS.X);
-  const socket = io("https://server-production-960b.up.railway.app");
+  const socket = io("https://server-production-265b.up.railway.app");
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
