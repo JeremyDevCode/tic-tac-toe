@@ -63,7 +63,9 @@ export default function Multiplayer() {
 
   return (
     <main className="bg-[#0D0F12] h-screen flex flex-col items-center justify-center gap-20 relative">
-      <h1 className="text-7xl font-extrabold text-[#E3E6E8]">Tic Tac Toe</h1>
+      <h1 className="text-7xl font-extrabold text-[#E3E6E8]">
+        Tic Tac Toe <span className="text-xl text-[#999]">{"[BETA]"}</span>
+      </h1>
       <section className="grid grid-cols-3">
         {board.map((square, index) => {
           return (
